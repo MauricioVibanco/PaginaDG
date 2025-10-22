@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mala suerte</title>
+  <style>
+    :root{
+      --bg1:#0f172a; /* dark navy */
+      --bg2:#0b1020; /* very dark */
+      --accent:#ff6b6b;
+      --text:#ffffff;
+    }
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{
+      display:grid;place-items:center;
+      background:radial-gradient(circle at 10% 10%, rgba(255,107,107,0.06), transparent 10%),
+                 linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--text);
+    }
+    .card{
+      text-align:center;
+      padding:3rem 2.5rem;
+      border-radius:18px;
+      backdrop-filter: blur(6px) saturate(1.1);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      max-width:900px;
+      width:90%;
+      transform:translateY(0);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
+      100%{transform:translateY(0)}
+    }
+    h1{
+      margin:0 0 .6rem 0;
+      font-size:clamp(28px,6vw,64px);
+      letter-spacing:0.6px;
+      color:var(--accent);
+    }
+    p{margin:0;font-size:clamp(14px,2.6vw,20px);opacity:0.95}
+    /* subtle confetti dots */
+    .dot{position:fixed;width:8px;height:8px;border-radius:50%;opacity:0.9}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Mala suerte</h1>
+    <p>Segui participando</p>
+  </div>
+
+  <script>
+    // optional: generate a few colorful floating dots for visual interest
+    const colors=["#ff6b6b","#ffd166","#6bcB77","#6ec1ff","#d9a2ff"];
+    for(let i=0;i<12;i++){
+      const d=document.createElement('div');
+      d.className='dot';
+      d.style.background=colors[i%colors.length];
+      d.style.left=(Math.random()*100)+'%';
+      d.style.top=(Math.random()*100)+'%';
+      d.style.transform='translate(-50%,-50%)';
+      d.style.opacity=(0.35+Math.random()*0.6).toFixed(2);
+      d.style.width=(6+Math.random()*12)+'px';
+      d.style.height=d.style.width;
+      d.style.animation=`float${i} ${6+Math.random()*6}s ease-in-out infinite`;
+      document.body.appendChild(d);
+      const keyframes=`@keyframes float${i}{0%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-20px)}100%{transform:translate(-50%,-50%) translateY(0)}}`;
+      const st=document.createElement('style');st.innerHTML=keyframes;document.head.appendChild(st);
+    }
+  </script>
+</body>
+</html>
