@@ -1,2 +1,2 @@
-# PaginaDise-oGraficoMV
+# PaginaDG
 PaginaDiseñoGrafico MV
